@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        margin: "auto",
+        width: 800,
+        paddingTop: "1rem",
+      }}
+    >
+      <h1 className="title">Pokemon Search</h1>
+      <table width="100%">
+        <thead>
+          <th>Name</th>
+          <th>Type</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bulbasaur</td>
+            <td>Grass, Poison</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
