@@ -60,7 +60,7 @@ function App() {
       .then((data) => pokemonSet(data));
   }, []);
 
-  if (!pokemon) {
+  if (!pokemon.length) {
     return <div>Loading data</div>;
   }
 
