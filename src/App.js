@@ -1,16 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import Button from "@mui/material/Button";
 import "./App.css";
 
-const PokemonRow = ({ pokemon, onSelect }) => (
-  <tr>
-    <td>{pokemon.name.english}</td>
-    <td>{pokemon.type.join(", ")}</td>
-    <td>
-      <button onClick={() => onSelect(pokemon)}>Select!</button>
-    </td>
-  </tr>
+const PokemonRow = ({ pokemon, onClick }) => (
+  <>
+    <tr key={pokemon.id}>
+      <td>{pokemon.name.english}</td>
+      <td>{pokemon.type.join(", ")}</td>
+      <td>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => onClick(pokemon)}
+        >
+          More Information
+        </Button>
+      </td>
+    </tr>
+  </>
 );
 
 PokemonRow.propTypes = {
@@ -25,14 +34,16 @@ PokemonRow.propTypes = {
 
 const PokemonInfo = ({ name, base }) => (
   <div>
-    <h1>{name.english}</h1>
+    <h2>{name.english}</h2>
     <table>
-      {Object.keys(base).map((key) => (
-        <tr key={key}>
-          <td>{key}</td>
-          <td>{base[key]}</td>
-        </tr>
-      ))}
+      <tbody>
+        {Object.keys(base).map((key) => (
+          <tr key={key}>
+            <td>{key}</td>
+            <td>{base[key]}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   </div>
 );
@@ -57,7 +68,7 @@ const Title = styled.h1`
 
 const TwoColumnLayout = styled.div`
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 80% 20%;
   grid-column-gap: 1rem;
 `;
 
@@ -69,14 +80,14 @@ const Container = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  font-size: x-large;
+  font-size: large;
   padding: 0.2rem;
 `;
 
 function App() {
   const [filter, filterSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
-  const [selectedItem, selectedItemSet] = React.useState(null);
+  const [selectedPokemon, selectedPokemonSet] = React.useState(null);
 
   React.useEffect(() => {
     fetch("/starting-react/pokemon.json")
@@ -94,14 +105,11 @@ function App() {
       <TwoColumnLayout>
         <div>
           <Input
+            type="text"
             value={filter}
             onChange={(evt) => filterSet(evt.target.value)}
           />
           <table width="100%">
-            <thead>
-              <th>Name</th>
-              <th>Type</th>
-            </thead>
             <tbody>
               {pokemon
                 .filter((pokemon) =>
@@ -114,13 +122,13 @@ function App() {
                   <PokemonRow
                     pokemon={pokemon}
                     key={pokemon.id}
-                    onSelect={(pokemon) => selectedItemSet(pokemon)}
+                    onClick={(pokemon) => selectedPokemonSet(pokemon)}
                   />
                 ))}
             </tbody>
           </table>
         </div>
-        {selectedItem && <PokemonInfo {...selectedItem} />}
+        {selectedPokemon && <PokemonInfo {...selectedPokemon} />}
       </TwoColumnLayout>
     </Container>
   );
