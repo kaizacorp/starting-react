@@ -3,7 +3,9 @@ import PokemonType from "../PokemonType";
 import PokemonContext from "../PokemonContext";
 
 const PokemonInfo = () => {
-    const {selectedPokemon}  = useContext(PokemonContext);
+    const {
+      state: {selectedPokemon} ,
+    } = useContext(PokemonContext);
     return selectedPokemon ? (
   <div>
     <h2>{selectedPokemon.name.english}</h2>
