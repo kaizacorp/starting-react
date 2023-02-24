@@ -1,4 +1,4 @@
-Following the Jack Herrington tutorial here: https://www.youtube.com/playlist?list=PLNqp92_EXZBKa1U7JbgUwBnDk3XzYDvXe
+Following the [Jack Herrington tutorial](https://www.youtube.com/playlist?list=PLNqp92_EXZBKa1U7JbgUwBnDk3XzYDvXe)
 
 # Getting Started with Create React App
 
